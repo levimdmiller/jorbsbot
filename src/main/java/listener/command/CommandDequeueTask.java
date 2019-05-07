@@ -1,18 +1,19 @@
 package listener.command;
 
+import background.BackgroundTask;
 import bot.events.ChatMessageEvent;
 import db.command.CommandDao;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
-import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import listener.command.annotations.CommandQueue;
 import listener.command.annotations.MessageQueue;
 import listener.command.matching.CommandMatcher;
 
-public class CommandDequeueTask extends TimerTask {
+public class CommandDequeueTask implements BackgroundTask {
 
   private final Queue<ChatMessageEvent> commands;
   private final Queue<ChatMessageEvent> botMessages;
@@ -39,6 +40,26 @@ public class CommandDequeueTask extends TimerTask {
         emptyQueue(botMessages, cutoff)
     ).forEach(commandDao::savePairings);
 
+  }
+
+  @Override
+  public long getDelay() {
+    return 0;
+  }
+
+  @Override
+  public long getPeriod() {
+    return 10;
+  }
+
+  @Override
+  public TimeUnit getUnit() {
+    return TimeUnit.SECONDS;
+  }
+
+  @Override
+  public void stop() {
+    //TODO: Save items in queue.
   }
 
   /**

@@ -3,7 +3,6 @@ package config;
 import com.google.inject.AbstractModule;
 
 public class ConfigModule extends AbstractModule {
-
   private final String[] args;
 
   public ConfigModule(String[] args) {

@@ -1,14 +1,15 @@
 package bot;
 
+import background.BackgroundTask;
 import bot.events.MessageListener;
 import config.Config;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import lombok.extern.log4j.Log4j;
-import util.StoppableRunnable;
 
 @Log4j
-public class BotRunner implements StoppableRunnable {
+public class BotRunner implements BackgroundTask {
 
   private final IrcBot bot;
   private final Config config;
@@ -39,5 +40,20 @@ public class BotRunner implements StoppableRunnable {
     } catch (BotException e) {
       log.error("Error shutting down bot.", e);
     }
+  }
+
+  @Override
+  public long getDelay() {
+    return 0;
+  }
+
+  @Override
+  public long getPeriod() {
+    return 10;
+  }
+
+  @Override
+  public TimeUnit getUnit() {
+    return TimeUnit.SECONDS;
   }
 }

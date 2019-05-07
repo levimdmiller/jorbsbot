@@ -9,7 +9,6 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class User {
-
   private final UUID userId;
   private final String realName;
   private final String server;

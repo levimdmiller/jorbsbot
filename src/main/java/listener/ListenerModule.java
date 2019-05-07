@@ -18,21 +18,16 @@ public class ListenerModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    Multibinder<MessageListener> shapeBinder = Multibinder
-        .newSetBinder(binder(), MessageListener.class);
-    shapeBinder.addBinding().to(CommandListener.class);
+    Multibinder<MessageListener> listenerBinder = Multibinder.newSetBinder(binder(), MessageListener.class);
+    listenerBinder.addBinding().to(CommandListener.class);
 
     bindConstant().annotatedWith(BotName.class).to("adventskynet");
-    bind(new TypeLiteral<Queue<ChatMessageEvent>>() {
-    })
+    bind(new TypeLiteral<Queue<ChatMessageEvent>>(){})
         .annotatedWith(CommandQueue.class)
-        .to(new TypeLiteral<ConcurrentLinkedQueue<ChatMessageEvent>>() {
-        });
-    bind(new TypeLiteral<Queue<ChatMessageEvent>>() {
-    })
+        .to(new TypeLiteral<ConcurrentLinkedQueue<ChatMessageEvent>>(){});
+    bind(new TypeLiteral<Queue<ChatMessageEvent>>(){})
         .annotatedWith(MessageQueue.class)
-        .to(new TypeLiteral<ConcurrentLinkedQueue<ChatMessageEvent>>() {
-        });
+        .to(new TypeLiteral<ConcurrentLinkedQueue<ChatMessageEvent>>(){});
 
     bind(CommandMatcher.class).to(BipartideMatchingCommandMatcher.class);
 
