@@ -3,11 +3,11 @@ package listener.command;
 import bot.BotException;
 import bot.events.ChatMessageEvent;
 import bot.events.MessageListener;
+import java.util.Queue;
+import javax.inject.Inject;
 import listener.command.annotations.BotName;
 import listener.command.annotations.CommandQueue;
 import listener.command.annotations.MessageQueue;
-import java.util.Queue;
-import javax.inject.Inject;
 
 public class CommandListener implements MessageListener {
 

@@ -1,14 +1,15 @@
-import bot.BotException;
-import bot.IrcBot;
+package bot;
+
 import bot.events.MessageListener;
 import config.Config;
 import java.util.Set;
 import javax.inject.Inject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j;
+import util.StoppableRunnable;
 
-public class BotRunner implements Runnable {
-  private static final Logger log = LoggerFactory.getLogger(BotRunner.class);
+@Log4j
+public class BotRunner implements StoppableRunnable {
+
   private final IrcBot bot;
   private final Config config;
   private final Set<MessageListener> listeners;
@@ -24,7 +25,6 @@ public class BotRunner implements Runnable {
   public void run() {
     listeners.forEach(bot::addMessageListener);
 
-    registerShutdownHook();
     try {
       bot.connect();
     } catch (BotException e) {
@@ -32,13 +32,12 @@ public class BotRunner implements Runnable {
     }
   }
 
-  private void registerShutdownHook() {
-    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-      try {
-        bot.disconnect();
-      } catch (BotException e) {
-        log.error("Error shutting down bot.", e);
-      }
-    }));
+  @Override
+  public void stop() {
+    try {
+      bot.disconnect();
+    } catch (BotException e) {
+      log.error("Error shutting down bot.", e);
+    }
   }
 }

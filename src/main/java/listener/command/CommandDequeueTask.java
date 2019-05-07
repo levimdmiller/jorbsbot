@@ -50,7 +50,7 @@ public class CommandDequeueTask extends TimerTask {
    */
   private List<ChatMessageEvent> emptyQueue(Queue<ChatMessageEvent> queue, Instant maxTime) {
     List<ChatMessageEvent> items = new ArrayList<>();
-    while(queue.peek() != null && maxTime.compareTo(queue.peek().getTimestamp()) >= 0) {
+    while (queue.peek() != null && maxTime.compareTo(queue.peek().getTimestamp()) >= 0) {
       items.add(queue.poll());
     }
     return items;

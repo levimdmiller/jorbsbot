@@ -1,6 +1,5 @@
 package bot;
 
-import bot.events.EventListener;
 import bot.events.MessageListener;
 
 public interface IrcBot {

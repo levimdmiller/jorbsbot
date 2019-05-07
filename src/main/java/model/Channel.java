@@ -9,6 +9,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class Channel {
+
   private final String name;
   private final UUID channelId;
 }

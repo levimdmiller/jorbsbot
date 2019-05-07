@@ -1,7 +1,5 @@
 package config;
 
-import java.net.URL;
-
 /**
  * https://dev.twitch.tv/docs/irc/guide/
  */

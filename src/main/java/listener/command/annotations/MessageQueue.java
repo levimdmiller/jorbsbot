@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @BindingAnnotation
 public @interface MessageQueue {
+
 }

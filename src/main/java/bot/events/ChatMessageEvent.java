@@ -11,6 +11,7 @@ import model.User;
 @Builder
 @AllArgsConstructor
 public class ChatMessageEvent {
+
   private final Channel channel;
   private final String channelSource;
   private final User user;
