@@ -1,6 +1,7 @@
 package listener.command.matching;
 
 import bot.events.ChatMessageEvent;
+import java.util.Collection;
 import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -14,7 +15,7 @@ public interface CommandMatcher {
    * @param messages - list of messages
    * @return - pairing
    */
-  List<Pair<ChatMessageEvent, ChatMessageEvent>> pairMessages(
+  Collection<Pair<ChatMessageEvent, ChatMessageEvent>> pairMessages(
       List<ChatMessageEvent> commands,
       List<ChatMessageEvent> messages
   );

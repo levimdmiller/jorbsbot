@@ -1,6 +1,5 @@
 package listener.command;
 
-import bot.BotException;
 import bot.events.ChatMessageEvent;
 import bot.events.MessageListener;
 import java.util.Queue;
@@ -26,9 +25,10 @@ public class CommandListener implements MessageListener {
   }
 
   @Override
-  public void handle(ChatMessageEvent messageEvent) throws BotException {
+  public void handle(ChatMessageEvent messageEvent) {
     if (botName.equalsIgnoreCase(messageEvent.getUser().getRealName())) {
       botMessages.offer(messageEvent);
+      return; // bot messages aren't also commands.
     }
     if (messageEvent.getMessage().startsWith("!")) {
       commands.offer(messageEvent);

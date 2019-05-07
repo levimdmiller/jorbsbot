@@ -11,7 +11,7 @@ import listener.command.CommandListener;
 import listener.command.annotations.BotName;
 import listener.command.annotations.CommandQueue;
 import listener.command.annotations.MessageQueue;
-import listener.command.matching.BipartideMatchingCommandMatcher;
+import listener.command.matching.BipartiteMatchingCommandMatcher;
 import listener.command.matching.CommandMatcher;
 
 public class ListenerModule extends AbstractModule {
@@ -29,7 +29,7 @@ public class ListenerModule extends AbstractModule {
         .annotatedWith(MessageQueue.class)
         .to(new TypeLiteral<ConcurrentLinkedQueue<ChatMessageEvent>>(){});
 
-    bind(CommandMatcher.class).to(BipartideMatchingCommandMatcher.class);
+    bind(CommandMatcher.class).to(BipartiteMatchingCommandMatcher.class);
 
   }
 }
